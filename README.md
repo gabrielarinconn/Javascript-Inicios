@@ -71,7 +71,7 @@ Diseño de una aplicación web completa que integra todos los conocimientos del 
 
 1. Clona este repositorio:
 ```bash
-git clone https://github.com/tu-usuario/nombre-del-repo.git
+git clone https://github.com/gabrielarinconn/Javascript-Inicios
 
 ```
 
