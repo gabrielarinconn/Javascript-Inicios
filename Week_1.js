@@ -38,3 +38,16 @@ TASK 4
     Si la edad es mayor o igual a 18, muestra:
         "Hola [nombre], eres mayor de edad. ¡Prepárate para grandes oportunidades en el mundo de la programación!"
 */
+
+/*
+
+Criterios de aceptación
+
+    El archivo se llama sistema_interactivo.js.
+    Se usan let o const (no var).
+    Se valida que la edad sea un número válido.
+    Se muestran mensajes personalizados según el valor de la edad.
+    Se utiliza console.error() para errores de entrada.
+    El código contiene comentarios explicativos en cada sección.
+
+*/
