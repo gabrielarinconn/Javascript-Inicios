@@ -1,0 +1,40 @@
+// 1. Fundamentos e Interacción Básica
+// Descripción de las tareas
+
+/*
+TASK 1
+1. Configuración inicial del proyecto:
+
+    Crea un archivo llamado sistema_interactivo.js.
+    Asegúrate de que el archivo pueda ejecutarse en el navegador o en Node.js para pruebas.
+    Comenta cada sección del código para mayor comprensión.
+*/
+
+/*
+TASK 2
+2. Entrada de datos del usuario:
+
+    Usa prompt() para solicitar el nombre.
+    Usa prompt() para solicitar la edad.
+    Declara variables usando let o const y asigna los valores ingresados.
+*/
+
+
+/*
+TASK 3
+3. Validación de la edad:
+
+    Comprueba si el valor ingresado para la edad es un número.
+    Si no es un número, muestra un mensaje de error usando console.error("Error: Por favor, ingresa una edad válida en números.").
+*/
+
+
+/*
+TASK 4
+4. Condicionales y mensajes dinámicos:
+
+    Si la edad es menor a 18, muestra con alert() o console.log():
+        "Hola [nombre], eres menor de edad. ¡Sigue aprendiendo y disfrutando del código!"
+    Si la edad es mayor o igual a 18, muestra:
+        "Hola [nombre], eres mayor de edad. ¡Prepárate para grandes oportunidades en el mundo de la programación!"
+*/
