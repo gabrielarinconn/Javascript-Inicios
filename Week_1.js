@@ -1,5 +1,5 @@
 // 1. Fundamentos e Interacción Básica
-// Descripción de las tareas
+// Creación de un sistema interactivo de mensajes
 
 /*
 TASK 1
