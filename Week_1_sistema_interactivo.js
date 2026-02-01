@@ -19,6 +19,8 @@ TASK 2
     Declara variables usando let o const y asigna los valores ingresados.
 */
 
+const nombre = prompt("Por favor, ingresa tu nombre:");
+const entradaEdad = prompt("Por favor, ingresa tu edad:");
 
 /*
 TASK 3
@@ -28,6 +30,13 @@ TASK 3
     Si no es un número, muestra un mensaje de error usando console.error("Error: Por favor, ingresa una edad válida en números.").
 */
 
+const edad = Number(entradaEdad);
+
+// Verificamos si la conversión falló (NaN) o si el campo está vacío
+if (isNaN(edad) || entradaEdad === null || entradaEdad.trim() === "") {
+    console.error("Error: Por favor, ingresa una edad válida en números.");
+    alert("Hubo un error con la edad ingresada. Revisa la consola.");
+} else {
 
 /*
 TASK 4
@@ -39,6 +48,20 @@ TASK 4
         "Hola [nombre], eres mayor de edad. ¡Prepárate para grandes oportunidades en el mundo de la programación!"
 */
 
+        if (edad < 18) {
+        // Mensaje para menores de edad
+        const mensajeMenor = `Hola ${nombre}, eres menor de edad. ¡Sigue aprendiendo y disfrutando del código!`;
+        console.log(mensajeMenor);
+        alert(mensajeMenor);
+    } else {
+        // Mensaje para mayores de edad
+        const mensajeMayor = `Hola ${nombre}, eres mayor de edad. ¡Prepárate para grandes oportunidades en el mundo de la programación!`;
+        console.log(mensajeMayor);
+        alert(mensajeMayor);
+    }
+}
+
+    
 /*
 
 Criterios de aceptación
