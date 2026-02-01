@@ -1,50 +1,71 @@
-// 3. Persistencia Local (Mini-App de Notas)
-// Creación de un sistema interactivo de mensajes
+// TASK 2: Selección e inspección
+const inputNota = document.getElementById('inputNota');
+const btnAgregar = document.querySelector('#btnAgregar');
+const listaNotasUI = document.getElementById('listaNotas');
 
-/*
-TASK 1
-1. Configuración inicial del proyecto:
+console.log("Referencias cargadas:", { inputNota, btnAgregar, listaNotasUI });
 
-    Crea un archivo llamado sistema_interactivo.js.
-    Asegúrate de que el archivo pueda ejecutarse en el navegador o en Node.js para pruebas.
-    Comenta cada sección del código para mayor comprensión.
-*/
+// TASK 5: Estado inicial (Arreglo en memoria)
+let notas = JSON.parse(localStorage.getItem("notas")) || [];
 
-/*
-TASK 2
-2. Entrada de datos del usuario:
+// Función para renderizar una nota individual en el DOM
+const crearElementoNota = (texto) => {
+    const li = document.createElement('li');
+    li.textContent = texto;
 
-    Usa prompt() para solicitar el nombre.
-    Usa prompt() para solicitar la edad.
-    Declara variables usando let o const y asigna los valores ingresados.
-*/
+    // TASK 4: Botón eliminar
+    const btnEliminar = document.createElement('button');
+    btnEliminar.textContent = 'Eliminar';
+    btnEliminar.className = 'delete';
+    
+    btnEliminar.onclick = () => {
+        // Eliminar del DOM (removeChild)
+        listaNotasUI.removeChild(li);
+        
+        // Actualizar arreglo y LocalStorage
+        notas = notas.filter(n => n !== texto);
+        guardarEnStorage();
+        console.log(`Eliminado: "${texto}"`);
+    };
 
-/*
-TASK 3
-3. Validación de la edad:
+    li.appendChild(btnEliminar);
+    return li;
+};
 
-    Comprueba si el valor ingresado para la edad es un número.
-    Si no es un número, muestra un mensaje de error usando console.error("Error: Por favor, ingresa una edad válida en números.").
-*/
+// TASK 3: Función Agregar
+btnAgregar.addEventListener('click', () => {
+    const texto = inputNota.value.trim();
 
-/*
-TASK 4
-4. Condicionales y mensajes dinámicos:
+    if (texto === "") {
+        alert("Por favor, escribe una nota.");
+        return;
+    }
 
-    Si la edad es menor a 18, muestra con alert() o console.log():
-        "Hola [nombre], eres menor de edad. ¡Sigue aprendiendo y disfrutando del código!"
-    Si la edad es mayor o igual a 18, muestra:
-        "Hola [nombre], eres mayor de edad. ¡Prepárate para grandes oportunidades en el mundo de la programación!"
-*/
+    // Agregar al arreglo
+    notas.push(texto);
+    
+    // Renderizar en DOM (appendChild)
+    const nuevaNota = crearElementoNota(texto);
+    listaNotasUI.appendChild(nuevaNota);
 
+    // Persistencia y limpieza
+    guardarEnStorage();
+    inputNota.value = "";
+    inputNota.focus();
+    console.log(`Nota agregada: "${texto}"`);
+});
 
-/* 
-Criterios de aceptación
+// TASK 5: Persistencia
+function guardarEnStorage() {
+    localStorage.setItem("notas", JSON.stringify(notas));
+}
 
-    El archivo se llama sistema_interactivo.js.
-    Se usan let o const (no var).
-    Se valida que la edad sea un número válido.
-    Se muestran mensajes personalizados según el valor de la edad.
-    Se utiliza console.error() para errores de entrada.
-    El código contiene comentarios explicativos en cada sección.
-*/
+// Carga inicial
+function cargarNotas() {
+    notas.forEach(nota => {
+        listaNotasUI.appendChild(crearElementoNota(nota));
+    });
+    console.log(`Se cargaron ${notas.length} notas desde Local Storage.`);
+}
+
+cargarNotas();
