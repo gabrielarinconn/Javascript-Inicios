@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Notas Dinámicas</title>
+    <style>
+        body { font-family: sans-serif; max-width: 400px; margin: 20px auto; }
+        .controles { display: flex; gap: 10px; margin-bottom: 20px; }
+        li { margin-bottom: 8px; display: flex; justify-content: space-between; }
+        button.delete { color: red; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h2>Mis Notas</h2>
+    <p>Escribe algo y presiona "Agregar" para guardar.</p>
+
+    <div class="controles">
+        <input type="text" id="inputNota" placeholder="Nueva nota...">
+        <button id="btnAgregar">Agregar</button>
+    </div>
+
+    <ul id="listaNotas"></ul>
+
+    <script src="Week_3.js"></script>
+</body>
+</html>
