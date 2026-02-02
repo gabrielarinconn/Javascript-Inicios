@@ -21,6 +21,21 @@ TASK 2
     Muestra mensajes dinámicos de éxito o error en consola o en el DOM.
 */
 
+
+/**
+ * CONFIGURACIÓN Y ESTADO GLOBAL
+ */
+const URL_API = 'https://jsonplaceholder.typicode.com/posts'; // Endpoint de prueba
+let productos = JSON.parse(localStorage.getItem('productos_app')) || [];
+
+// Selectores
+const inputNombre = document.getElementById('nombreProductor');
+const inputPrecio = document.getElementById('precioProducto');
+const btnGuardar = document.getElementById('btnGuardar');
+const btnFetch = document.getElementById('btnFetch');
+const listaUI = document.getElementById('listaProductos');
+
+
 /*
 TASK 3
 3. Manipulación dinámica del DOM:
@@ -41,6 +56,57 @@ TASK 4
     Al recargar la página, renderiza los datos almacenados automáticamente.
 */
 
+
+const renderizarProductos = () => {
+    listaUI.innerHTML = ''; // Limpiar lista
+    productos.forEach((prod, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <strong>${prod.nombre}</strong> - $${prod.precio}
+            <button class="btn-delete" onclick="eliminarProducto(${index})">Eliminar</button>
+        `;
+        listaUI.appendChild(li);
+    });
+    actualizarStorage();
+};
+
+const actualizarStorage = () => {
+    localStorage.setItem('productos_app', JSON.stringify(productos));
+    console.log("LocalStorage actualizado.");
+};
+
+// Agregar nuevo producto (Local)
+btnGuardar.onclick = () => {
+    const nombre = inputNombre.value.trim();
+    const precio = inputPrecio.value.trim();
+
+    // TASK 2: Validación
+    if (!nombre || !precio) {
+        alert("Campos obligatorios vacíos.");
+        return;
+    }
+
+    const nuevoProd = { nombre, precio, id: Date.now() };
+    productos.push(nuevoProd);
+    
+    renderizarProductos();
+    limpiarFormulario();
+    console.log("Producto agregado localmente:", nuevoProd);
+};
+
+const eliminarProducto = (index) => {
+    productos.splice(index, 1);
+    renderizarProductos();
+    console.log("Producto eliminado.");
+};
+
+const limpiarFormulario = () => {
+    inputNombre.value = '';
+    inputPrecio.value = '';
+    inputNombre.focus();
+};
+
+
 /*
 TASK 5
 5. Integración con Fetch API (Consumo de API):
@@ -54,6 +120,47 @@ TASK 5
     Usa async/await y try...catch para manejar las respuestas y errores.
     Muestra en consola o DOM los resultados de cada solicitud.
 */
+
+// GET: Obtener datos
+btnFetch.addEventListener('click', async () => {
+    try {
+        const resp = await fetch(URL_API + '?_limit=3');
+        const datos = await resp.json();
+        
+        // Mapeamos los datos de la API a nuestro formato
+        const productosAPI = datos.map(item => ({
+            nombre: item.title.substring(0, 15),
+            precio: Math.floor(Math.random() * 100),
+            id: item.id
+        }));
+
+        productos = [...productos, ...productosAPI];
+        renderizarProductos();
+        console.table(productosAPI);
+        document.getElementById('status-api').innerText = "Sincronización exitosa.";
+    } catch (error) {
+        console.error("Error al obtener datos:", error);
+    }
+});
+
+// POST: Ejemplo de cómo enviar un producto al servidor
+const enviarAServidor = async (producto) => {
+    try {
+        const response = await fetch(URL_API, {
+            method: 'POST',
+            body: JSON.stringify(producto),
+            headers: { 'Content-type': 'application/json; charset=UTF-8' }
+        });
+        const data = await response.json();
+        console.log("Respuesta POST exitosa:", data);
+    } catch (error) {
+        console.error("Error en POST:", error);
+    }
+};
+
+// Inicialización
+renderizarProductos();
+
 
 /*
 TASK 6
