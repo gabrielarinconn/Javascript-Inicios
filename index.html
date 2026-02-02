@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SincroApp: Productos & API</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
+</head>
+<body>
+    <header>
+        <h1>Gestión de Productos</h1>
+        <p>Persistencia Local + Sincronización API</p>
+    </header>
+
+    <main>
+        <section id="formulario">
+            <h3>Nuevo Producto</h3>
+            <input type="text" id="nombreProductor" placeholder="Nombre del producto">
+            <input type="number" id="precioProducto" placeholder="Precio ($)">
+            <button id="btnGuardar">Guardar Localmente</button>
+        </section>
+
+        <hr>
+
+        <section id="controles-api">
+            <button id="btnFetch">Sincronizar con Servidor (GET)</button>
+            <small id="status-api"></small>
+        </section>
+
+        <ul id="listaProductos"></ul>
+    </main>
+
+    <script src="Week_4.js"></script>
+</body>
+</html>
